@@ -81,6 +81,8 @@ def setup_options(parser):
                       help = "select non-matching lines")
     parser.add_option("--query", dest = "query",
                       help = "pre-input query")
+    parser.add_option("--return-query", dest = "return_query", default = False,
+                      help = "return query if cancel")
     parser.add_option("--eager", action = "store_true", dest = "eager", default = False,
                       help = "suppress lazy matching (slower, but display correct candidates count)")
     parser.add_option("--eval", dest = "string_to_eval",
@@ -246,6 +248,7 @@ Maybe all descriptors are redirected."""))
             # load run-command file
             load_rc(percol, options.rcfile)
             # override prompts
+            percol.return_query = options.return_query
             if options.prompt is not None:
                 percol.view.__class__.PROMPT = property(lambda self: options.prompt)
             if options.right_prompt is not None:

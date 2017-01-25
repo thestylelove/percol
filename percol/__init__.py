@@ -270,4 +270,6 @@ class Percol(object):
         return value
 
     def cancel_with_exit_code(self):
+        if self.return_query:
+            print self.model.query,
         return 1
